@@ -37,3 +37,20 @@ int Solution::maxp3(vector<int> &A) {
 
     return maxi;
 }
+
+Or We know highest will be when we have 2 negative and 1 positive or 3 positive max.
+
+answer will be max of these .
+
+int Solution::maxp3(vector<int> &A) {
+    int n = A.size();
+    if(n == 1) return A[0];
+    if(n == 2) return A[0]*A[1];
+
+    
+    sort(A.begin() , A.end());
+    return max(A[0]*A[1]*A[n-1] , A[n-1]*A[n-2]*A[n-3]);
+
+    // return maxi;
+}
+
