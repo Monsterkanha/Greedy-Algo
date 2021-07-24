@@ -1,0 +1,39 @@
+Here, first we sort the array and count prod from beginning and then keep sliding window from curr and keep including element from right.
+
+Exception : - When 0 is encountered there is no point carry forwarding the product, Break at that point and rest mulitply include from end.
+      j
+-3   -1   0  1  50  70   100
+
+initial prod = -3*-1*100.
+Our j will act like a pointer for sliding window.
+
+int Solution::maxp3(vector<int> &A) {
+    int n = A.size();
+    if(n == 1) return A[0];
+    if(n == 2) return A[0]*A[1];
+
+    
+    sort(A.begin() , A.end());
+    int maxi = 1 , i;
+    for(i= 0; i < 3; i++){
+        if(A[i] == 0) break;
+        maxi *= A[i];
+    }
+    int j = i-1 ,cnt = 2-j;
+    i = 0;
+    while(i < cnt){
+        maxi *= A[n-i-1];
+        i++;
+    }
+    int prod = maxi;
+    while(j >= 0){
+        prod /= A[j];
+        prod *= A[n-1-(2-j)];
+        maxi = max(maxi ,prod);
+        j--;
+    }
+    
+
+
+    return maxi;
+}
