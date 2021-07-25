@@ -1,0 +1,31 @@
+int nearestSmallerEqFib(int n)
+{
+    // Corner cases
+    if (n == 0 || n == 1)
+        return n;
+ 
+    // Find the greatest Fibonacci Number smaller
+    // than n.
+    int f1 = 0, f2 = 1, f3 = 1;
+    while (f3 <= n)
+    {
+        f1 = f2;
+        f2 = f3;
+        f3 = f1 + f2;
+    }
+    return f2;
+}
+
+int Solution::fibsum(int A) {
+    // vector<int> fib(A+1,0);
+    // fib[1] = 1;
+    // for(int i = 2; i <= A; i++){
+    //     fib[i] += fib[i-1] + fib[i-2];
+    // }
+    int ans = 0;
+    while(A > 0){
+        ans++;
+        A = A-nearestSmallerEqFib(A);
+    }
+}
+
