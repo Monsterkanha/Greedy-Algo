@@ -1,2 +1,2 @@
 # Greedy-Algo
-Here, I will post some good greedy problum.
+Here, I will post some good greedy problem.
