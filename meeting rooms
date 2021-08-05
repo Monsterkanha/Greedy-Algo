@@ -1,0 +1,29 @@
+sort the start and end time array individually.
+
+
+int Solution::solve(vector<vector<int> > &A) {
+    int n = A.size();
+    vector<int> start , end;
+    for(auto x: A){
+        start.push_back(x[0]);
+        end.push_back(x[1]);
+    }
+    sort(start.begin(), start.end());
+    sort(end.begin(), end.end());
+    
+
+    int plat = 1, ans = 1;
+    int i = 1, j = 0;
+    while(i < n && j < n){
+        if(start[i] < end[j] ){
+            plat++;
+            ans = max(ans, plat);
+            i++;
+        }
+        else{
+            plat--;
+            j++;
+        }
+    }
+    return ans;
+}
