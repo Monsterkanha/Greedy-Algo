@@ -1,0 +1,48 @@
+1. If total gas is greater than or equal to total cost then there is always a way.
+2. If i cannot go from i to x then no intermediate station can be reached to x.
+so we can directly skip to that station choosing that station as our starting index.
+
+
+
+class Solution {
+public:
+    int canCompleteCircuit(vector<int>& gas, vector<int>& cost) {
+        int n = gas.size();
+        int tot = 0;
+        for(int i = 0; i < n; i++)  tot += gas[i] - cost[i];
+        if(tot < 0) return -1;
+        
+        int start = 0 , curr = 0;
+        for(int i = 0; i < n; i++){
+            curr += gas[i] - cost[i];
+            if(curr < 0){
+                curr = 0;
+                start = i+1;
+            }  
+        }
+        return start;
+    }
+};
+
+
+2.
+class Solution {
+public:
+    int canCompleteCircuit(vector<int>& gas, vector<int>& cost) {
+        int n = gas.size();
+        int i = 0, j = 0;
+        while(i < n){         // Instead of looping for all the indexes we will directly jump to the index where we ran out of fuel. 
+            int gas_left = 0;
+            for(j = 1; j <= n; j++){   
+                int k = (i + j - 1)%n;
+                gas_left += gas[k] - cost[k];
+                if(gas_left < 0) break;
+            }
+            if(j > n){
+                return i;
+            }
+            i = i + j;
+        }        
+        return -1;
+    }
+};
